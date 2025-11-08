@@ -1,32 +1,36 @@
+// eslint.config.js
+import { defineConfig } from "eslint/config";
 import js from "@eslint/js";
 import globals from "globals";
-import react from "eslint-plugin-react";
-import { defineConfig } from "eslint/config";
+import pluginReact from "eslint-plugin-react";
+import pluginPrettier from "eslint-plugin-prettier";
+import babelParser from "@babel/eslint-parser";
 
 export default defineConfig([
     {
-        files: ["**/*.{js,mjs,cjs,jsx}"],
+        files: ["**/*.{js,jsx}"],
+
         languageOptions: {
-            ecmaVersion: "latest",
-            sourceType: "module",
-            globals: {
-                ...globals.browser,
-            },
+            parser: babelParser,
             parserOptions: {
+                requireConfigFile: false, // no babel.config.js needed
+                ecmaVersion: "latest",
+                sourceType: "module",
                 ecmaFeatures: {
                     jsx: true,
                 },
+                babelOptions: {
+                    plugins: ["@babel/plugin-syntax-jsx"],
+                },
             },
+            globals: globals.browser,
         },
-        settings: {
-            react: {
-                version: "detect",
-            },
-        },
+
         plugins: {
-            react,
+            react: pluginReact,
+            prettier: pluginPrettier,
         },
-        extends: [js.configs.recommended, react.configs.flat.recommended],
+
         rules: {
             "react/react-in-jsx-scope": "off",
             "prettier/prettier": "error",
