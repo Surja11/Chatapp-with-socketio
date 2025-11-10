@@ -12,7 +12,7 @@ load_dotenv()
 SECRET_KEY = os.getenv('JWT_SECRET')
 ALGORITHM = os.getenv("JWT_ALGORITHM"
                       )
-password_context = CryptContext(sheme = ["pbkdf2_sha256"], deprecated = "auto")
+password_context = CryptContext(schemes = ["pbkdf2_sha256"], deprecated = "auto")
 
 def hash_password(password : str):
   return password_context.hash(password)
@@ -22,7 +22,7 @@ def verify_password(password: str,hashed):
   return password_context.verify(password,hashed)
 
 
-def create_access_token(data, expiry_time :timedelta= timedelta(hour = 1)):
+def create_access_token(data, expiry_time :timedelta= timedelta(hours = 1)):
   data_to_encode = data.copy()
   expires_in = datetime.now()+expiry_time
   data_to_encode.update({"exp":expires_in, "type":"access"})
