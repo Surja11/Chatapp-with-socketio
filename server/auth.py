@@ -4,10 +4,11 @@ import os, jwt
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
 from fastapi import HTTPException, Depends
-
+from database.config import *
 
 load_dotenv()
 
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl = "/login")
 
 SECRET_KEY = os.getenv('JWT_SECRET')
 ALGORITHM = os.getenv("JWT_ALGORITHM"
@@ -49,4 +50,13 @@ def verify_token(token, expected_type):
   
 
    
-
+def get_current_user(token = Depends(oauth2_scheme)):
+  payload = verify_token(token , "access")
+  email = payload.get("email")
+  if not email: 
+    raise HTTPException(status_code = 401, detail = "Not authenticated")
+  
+  user = users_collection.find_one({"email" : email})
+  if not user: 
+    raise HTTPException(status_code = 401, detail = "User not found")
+  return user
