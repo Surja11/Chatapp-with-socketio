@@ -1,7 +1,6 @@
-from fastapi import HTTPException,APIRouter, Depends
+from fastapi import HTTPExceptions,APIView, Depends
 from auth import *
-
-router = APIRouter()
+router = APIView()
 
 @router.get('/api/friends/{id}')
 def search_friends( id: str, user = Depends(get_current_user)):
