@@ -36,20 +36,25 @@ const AuthForm = ({ method }) => {
 
         try {
             if (!isRegister) {
-                await login.mutateAsync({ username, email, password });
-                navigate("/");
+                await login.mutateAsync({ email, password });
+                navigate("/friends");
                 console.log("Saved tokens:", {
                     access: localStorage.getItem("access"),
                     refresh: localStorage.getItem("refresh"),
                 });
             } else {
-                await register.mutateAsync({ email, password });
-                console.log("registered successfully");
+                await register.mutateAsync({ email, password, username });
+                alert("registered successfully");
             }
         } catch (error) {
             alert(error);
+            
         } finally {
             setLoading(false);
+            setEmail("");
+            setPassword("");
+            setUsername("");
+            setPassword2("");
         }
     };
 
