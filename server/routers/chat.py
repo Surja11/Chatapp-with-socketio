@@ -20,3 +20,19 @@ def search_friends( id: str, user = Depends(get_current_user)):
       f.pop("password", None)
       f["_id"] = str(f["_id"])
     return friends
+
+
+@router.get('/api/messages/{friend_id}')
+def get_previous_messages(friend_id:str, user=Depends(get_current_user)):
+  #Query both directions and from oldest to newest
+  messages = chat_collection.find({
+    "$or": [
+      {"user_id":user.id,"friend_id":friend_id},
+      {"user_id":friend_id, "friend_id": user.id}, 
+    ]
+  }).sort("sent_at",1) 
+
+  message_list = list(messages)
+  if not message_list: 
+    raise HTTPException(status_code=404, detail = "Previous Messages not found")
+  return message_list

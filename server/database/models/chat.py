@@ -6,5 +6,6 @@ class Chat(BaseModel):
   friend_id : str
   text : str
   sent_at : datetime = datetime.now()
+  delivered : bool
 
   
