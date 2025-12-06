@@ -1,17 +1,11 @@
-from fastapi import FastAPI
-from routers import accounts,chat
-from sockets import sio_app
+from fastapi import FastAPI, Depends
+from routers import accounts, chat
 from fastapi.middleware.cors import CORSMiddleware
 from auth import *
+import socketio
+from sockets import sio_server
 
 app = FastAPI()
-
-origins = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://localhost:3000",  
-    "http://127.0.0.1:3000",
-]
 
 app.add_middleware(
     CORSMiddleware,
@@ -21,20 +15,21 @@ app.add_middleware(
     allow_headers=["*"],     
 )
 
-
-
-app.mount('/socket',app = sio_app)
-
 @app.get('/')
 def home():
-  return {'message': 'helo'}
+    return {'message': 'hello'}
 
 @app.get("/api/me")
-def me(current_user = Depends(get_current_user)):
-  current_user['_id']= str(current_user['_id'])
-  current_user.pop('password')
-  return current_user
-
+def me(current_user=Depends(get_current_user)):
+    current_user['_id'] = str(current_user['_id'])
+    current_user.pop('password', None)
+    return current_user
 
 app.include_router(accounts.router)
 app.include_router(chat.router)
+
+#Wrapping the complete FastAPI app with Socket.IO
+sio_app = socketio.ASGIApp(
+    socketio_server=sio_server,
+    other_asgi_app=app
+)
