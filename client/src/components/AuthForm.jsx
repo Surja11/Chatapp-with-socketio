@@ -48,7 +48,6 @@ const AuthForm = ({ method }) => {
             }
         } catch (error) {
             alert(error);
-            
         } finally {
             setLoading(false);
             setEmail("");
@@ -59,21 +58,21 @@ const AuthForm = ({ method }) => {
     };
 
     return (
-        <div className="min-h-screen bg-[#271300]">
-            <div className=" text-gray-200 flex  flex-col space-y-10 items-center">
-                <h1 className="text-center font-semibold text-2xl text-amber-100 mt-12 w-xl">
+        <div className="min-h-screen bg-gray-200">
+            <div className=" text-purple-500 flex  flex-col space-y-10 items-center">
+                <h1 className="text-center font-semibold text-2xl text-purple-500 mt-12 w-xl">
                     {name}
                 </h1>
                 <form
                     onSubmit={handleSubmit}
-                    className="flex flex-col items-center justify-center p-4 rounded-xl shadow shadow-yellow-50 border border-yellow-50 w-2xl "
+                    className="flex flex-col items-center justify-center p-4 rounded-xl shadow shadow-purple-50 border border-purple-300 w-2xl "
                 >
                     <div className="flex flex-col my-3">
-                        <label className="m-1 text-amber-100">Email</label>
+                        <label className="m-1 text-purple-500">Email</label>
                         <input
                             type="email"
                             placeholder="Enter your email"
-                            className="bg-amber-100 w-[90%] m-1 p-1 rounded brightness-90 focus:border focus:outline-pink-100 text-purple-950"
+                            className="bg-purple-200 w-[90%] m-1 p-1 rounded brightness-90 focus:border focus:outline-pink-100 text-purple-950"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
@@ -81,13 +80,13 @@ const AuthForm = ({ method }) => {
 
                     {method === "register" && (
                         <div className="flex flex-col mb-3 mx-5">
-                            <label className="m-1 text-amber-100">
+                            <label className="m-1 text-purple-500">
                                 Username
                             </label>
                             <input
                                 type="text"
                                 placeholder="Enter your username"
-                                className="w-[90%] m-1 p-1 focus:border-2 rounded bg-amber-100 brightness-90
+                                className="w-[90%] m-1 p-1 focus:border-2 rounded bg-purple-200 brightness-90
                             focus:outline-pink-100 text-purple-950"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
@@ -96,11 +95,11 @@ const AuthForm = ({ method }) => {
                     )}
 
                     <div className="flex flex-col mb-3 mx-5">
-                        <label className="m-1 text-amber-100">Password</label>
+                        <label className="m-1 text-purple-500">Password</label>
                         <input
                             type="password"
                             placeholder="Enter your password"
-                            className="w-[90%] m-1 p-1 focus:border rounded bg-amber-100 brightness-90 
+                            className="w-[90%] m-1 p-1 focus:border rounded bg-purple-200 brightness-90 
                         focus:outline-pink-100 text-purple-950"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -109,14 +108,14 @@ const AuthForm = ({ method }) => {
 
                     {method === "register" && (
                         <div className="flex flex-col">
-                            <label className="m-1 text-amber-100">
+                            <label className="m-1 text-purple-500">
                                 Retype Password
                             </label>
                             <input
                                 type="password"
                                 placeholder="Enter your password again"
                                 className="w-[90%] m-1 p-1 focus:border
-                            focus:outline-pink-100 text-purple-950 rounded bg-amber-100 brightness-90"
+                            focus:outline-pink-100 text-purple-950 rounded bg-purple-200 brightness-90"
                                 value={password2}
                                 onChange={(e) => setPassword2(e.target.value)}
                             />
@@ -125,14 +124,14 @@ const AuthForm = ({ method }) => {
 
                     <button
                         type="submit"
-                        className="p-2 rounded-2xl bg-amber-100 mt-6 px-4 brightness-90 text-purple-950 font-semibold hover:bg-[#eab8e4]"
+                        className="p-2 rounded-2xl bg-purple-400 mt-6 px-4 brightness-90 text-purple-950 font-semibold hover:bg-purple-800 hover:text-purple-200 cursor-pointer transition-all hover:brightness-100 disabled:opacity-50"
                         disabled={loading}
                     >
                         {loading ? "Loading..." : name}
                     </button>
 
                     {method === "login" ? (
-                        <p className="text-center text-amber-100 mt-2">
+                        <p className="text-center text-purple-500 mt-2">
                             Don't have an account?{" "}
                             <NavLink
                                 to="/register"
@@ -142,7 +141,7 @@ const AuthForm = ({ method }) => {
                             </NavLink>
                         </p>
                     ) : (
-                        <p className="text-center text-amber-100 mt-2">
+                        <p className="text-center text-purple-500 mt-2">
                             Already have an account?{" "}
                             <NavLink
                                 to="/login"

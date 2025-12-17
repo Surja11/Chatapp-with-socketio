@@ -10,6 +10,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
+import Chat from "./pages/Chat";
 function App() {
     const client = new QueryClient();
 
@@ -20,7 +21,11 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/" element={<Home />} />
-                    <Route path = "/friends" element ={<Friends/>}/>
+                    <Route path="/friends" element={<Friends />} />
+<<<<<<< HEAD
+                    <Route path="/chat" element={<Chat />} />
+=======
+>>>>>>> b1fcb0248c8b95b097174224f98738ef26190c4f
                 </Routes>
             </BrowserRouter>
         </QueryClientProvider>

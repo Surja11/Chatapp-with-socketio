@@ -1,7 +1,7 @@
 import socketio
 import datetime
 from bson import ObjectId
-from database.config import *
+from database import *
 
 sio_server = socketio.AsyncServer(
     async_mode='asgi',

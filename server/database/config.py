@@ -4,7 +4,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-client = MongoClient(os.getenv("MONGO_URI"))
+client = MongoClient(
+    os.getenv("MONGO_URI")
+)
+
 db = client.chatapp_db
-users_collection = db["users_collection"]
 chat_collection = db["chat_collection"]
+users_collection = db["users_collection"]
