@@ -10,6 +10,7 @@ export const login = async (data) => {
             return res.data;
         } catch (error) {
             console.log(error);
+            throw error;
         }
     }
 };

@@ -11,12 +11,17 @@ export const useLogin = () => {
     const mutation = useMutation({
         mutationFn: login,
         onSuccess: async (data) => {
-            localStorage.setItem("access_token", data.access);
-            localStorage.setItem("refresh_token", data.refresh);
+              if (!data?.access_token) {
+        console.error("Invalid login response:", data);
+        return;
+    }
+
+            localStorage.setItem("access_token", data.access_token);
+            localStorage.setItem("refresh_token", data.refresh_token);
             localStorage.setItem("email", data.email);
             const res = await axios.get(`${API_URL}me`, {
                 headers: {
-                    Authorization: `Bearer ${data.access}`,
+                    Authorization: `Bearer ${data.access_token}`,
                 },
             });
 

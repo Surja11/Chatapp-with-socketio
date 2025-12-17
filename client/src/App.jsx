@@ -1,6 +1,4 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+
 import "./App.css";
 
 import { Button } from "flowbite-react";
@@ -22,10 +20,7 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/" element={<Home />} />
                     <Route path="/friends" element={<Friends />} />
-<<<<<<< HEAD
                     <Route path="/chat" element={<Chat />} />
-=======
->>>>>>> b1fcb0248c8b95b097174224f98738ef26190c4f
                 </Routes>
             </BrowserRouter>
         </QueryClientProvider>

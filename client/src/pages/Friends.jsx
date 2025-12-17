@@ -98,17 +98,11 @@ const Friends = () => {
                     )}
 
                     {friends && friends.length > 0 ? (
-<<<<<<< HEAD:client/src/pages/Friends.jsx
                         <div className="flex flex-col gap-2">
                             {friends.map((friend, index) => (
                                 <FriendCard friend={friend} key={index} />
                             ))}
                         </div>
-=======
-                        friends.map((friend, index) => (
-                            <FriendCard friend={friend} key={index} />
-                        ))
->>>>>>> b1fcb0248c8b95b097174224f98738ef26190c4f:src/pages/Friends.jsx
                     ) : (
                         <div className="text-gray-500">No friend found</div>
                     )}
